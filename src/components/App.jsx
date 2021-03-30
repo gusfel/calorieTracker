@@ -14,7 +14,9 @@ class App extends React.Component {
       fname: '',
       lname: '',
       maxcals: null,
-      appStatus: 'welcome'
+      appStatus: 'welcome',
+      currentIn: null,
+      currentOut: null
     }
     this.changeStatus = this.changeStatus.bind(this);
     this.setUpUser = this.setUpUser.bind(this);
@@ -26,8 +28,37 @@ class App extends React.Component {
     })
   }
 
+  updateIn() {
+    const options = {
+      method: 'get',
+      url: '/updateIn',
+      data: {id: this.state.userid}
+    }
+    axios(options)
+      .then(res => {
+        this.setState({
+          currentIn: res,
+        })
+      })
+  }
+
+  updateOut() {
+    const options = {
+      method: 'get',
+      url: '/updateOut',
+      data: {id: this.state.userid}
+    }
+    axios(options)
+      .then(res => {
+        this.setState({
+          currentOut: res,
+        })
+      })
+  }
+
   setUpUser(obj) {
     this.setState(obj)
+
   }
 
 
@@ -38,11 +69,12 @@ class App extends React.Component {
           <WelcomeForm setUpUser={this.setUpUser} changeStatus={this.changeStatus}/>
         </div>
         )
-    } else if (this.state.appStatus === 'login') {
+    } else if (this.state.appStatus === 'newUser') {
       return (
-        <div>Login</div>
+        <div>Enter Info</div>
       )
     }
+    console.log(this.state)
     return (
       <div>is this thing on??</div>
     )
