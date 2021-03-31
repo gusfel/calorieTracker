@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.post('/food', (req, res) => {
   const food = req.query.query;
+  const foodText = JSON.parse(food).query;
   const userid = req.query.userid;
   const options = {
     method: 'post',
@@ -28,10 +29,39 @@ app.post('/food', (req, res) => {
     data: food,
     url: 'https://trackapi.nutritionix.com/v2/natural/nutrients/'
   };
+
+//   id BIGSERIAL,
+//  userId SMALLINT,
+//  foodName VARCHAR(30),
+//  amount SMALLINT,
+//  unit VARCHAR(20),
+//  caloriesIn SMALLINT,
+//  date DATE
   axios(options)
-    .then(res => {
-      console.log(res.data.foods[0].nf_calories);
+    .then(response => {
+      const calories = response.data.foods[0].nf_calories;
+      let date = new Date();
+      date = date.toLocaleDateString().slice(0, 10);
+      const query = `INSERT INTO
+      food( userid, foodname, caloriesin, date)
+      VALUES( ${userid}, '${foodText}', ${calories}, '${date}')`;
+      db.connect((err, client, done) => {
+        if (err) {
+          console.log(err);
+        } else {
+          client.query(query, (err2, data) => {
+            done();
+            if (err2) {
+              console.log(err2);
+            } else {
+              // console.log(data)
+              res.send('success');
+            }
+          });
+        }
+      });
     });
+    // make it post to the database
 });
 
 // {
