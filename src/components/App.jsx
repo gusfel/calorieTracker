@@ -5,6 +5,7 @@ import axios from 'axios';
 import FoodList from './FoodList.jsx'
 import WorkoutList from './WorkoutList.jsx'
 import NewUserForm from './NewUserForm.jsx'
+import AddWorkout from './AddWorkout.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -133,6 +134,7 @@ class App extends React.Component {
         <div>
           <FoodList foods={this.state.food}/>
           <WorkoutList workouts={this.state.workouts}/>
+          <AddWorkout updateOut={this.updateOut} user={this.state}/>
         </div>
       </div>
     )

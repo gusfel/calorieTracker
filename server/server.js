@@ -45,7 +45,9 @@ app.post('/food', (req, res) => {
 //  }
 
 app.post('/exercise', (req, res) => {
-  const exercise = req.body;
+  const exercise = req.query.workout;
+  const exerciseText = JSON.parse(exercise).query;
+  const userid = req.query.userid;
   const options = {
     method: 'post',
     headers: {
@@ -57,10 +59,28 @@ app.post('/exercise', (req, res) => {
     url: 'https://trackapi.nutritionix.com/v2/natural/exercise/'
   };
   axios(options)
-    .then(res => {
-      console.log(res.data.exercises[0].nf_calories);
-      // do a query to insert the calories into the workout table
-
+    .then(response => {
+      const calories = (response.data.exercises[0].nf_calories);
+      let date = new Date();
+      date = date.toLocaleDateString().slice(0, 10);
+      const query = `INSERT INTO
+      workouts(id, userid, exercise, caloriesout, date)
+      VALUES(default, ${userid}, '${exerciseText}', ${calories}, '${date}')`;
+      db.connect((err, client, done) => {
+        if (err) {
+          console.log(err);
+        } else {
+          client.query(query, (err2, data) => {
+            done();
+            if (err2) {
+              console.log(err2);
+            } else {
+              // console.log(data)
+              res.send('success');
+            }
+          });
+        }
+      });
     });
 });
 
