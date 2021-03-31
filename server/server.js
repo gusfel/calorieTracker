@@ -87,8 +87,10 @@ app.get('/login', (req, res) => {
 app.get('/updateIn', (req, res) => {
   const id = Number(req.query.id);
   let today = new Date();
-  today = today.toISOString().slice(0, 10);
-  const query = `SELECT SUM(caloriesin) FROM food where userid = ${id} AND date = '${today}'`;
+  // console.log(req)
+  today = today.toLocaleDateString().slice(0, 10);
+  console.log(today)
+  const query = `SELECT * FROM food where userid = ${id} AND date = '${today}'`;
   db.connect((err, client, done) => {
     if (err) {
       console.log(err);
@@ -98,7 +100,8 @@ app.get('/updateIn', (req, res) => {
         if (err2) {
           console.log(err2);
         } else {
-          res.send(data.rows[0].sum);
+          // console.log(data.rows)
+          res.send(data.rows);
         }
       });
     }
@@ -108,8 +111,10 @@ app.get('/updateIn', (req, res) => {
 app.get('/updateOut', (req, res) => {
   const id = Number(req.query.id);
   let today = new Date();
-  today = today.toISOString().slice(0, 10);
-  const query = `SELECT SUM(caloriesout) FROM workouts where userid = ${id} AND date = '${today}'`;
+
+  today = today.toLocaleDateString().slice(0, 10);
+  console.log(today);
+  const query = `SELECT * FROM workouts where userid = ${id} AND date = '${today}'`;
   db.connect((err, client, done) => {
     if (err) {
       console.log(err);
@@ -119,7 +124,8 @@ app.get('/updateOut', (req, res) => {
         if (err2) {
           console.log(err2);
         } else {
-          res.send(data.rows[0].sum);
+          // console.log(data.rows)
+          res.send(data.rows);
         }
       });
     }

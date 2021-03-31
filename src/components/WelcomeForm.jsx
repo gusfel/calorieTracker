@@ -33,6 +33,7 @@ class WelcomeForm extends React.Component {
         if (res.data) {
           const userData = res.data;
           userData.appStatus = ''
+          userData.userid = res.data.id
           this.props.setUpUser(userData)
         } else {
           //show warning
