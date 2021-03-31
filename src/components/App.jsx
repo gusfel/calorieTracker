@@ -6,6 +6,7 @@ import FoodList from './FoodList.jsx'
 import WorkoutList from './WorkoutList.jsx'
 import NewUserForm from './NewUserForm.jsx'
 import AddWorkout from './AddWorkout.jsx'
+import AddFood from './AddFood.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -133,6 +134,7 @@ class App extends React.Component {
         <Breakdown userInfo={this.state}/>
         <div>
           <FoodList foods={this.state.food}/>
+          <AddFood userid={this.state.userid} updateIn={this.updateIn}/>
           <WorkoutList workouts={this.state.workouts}/>
           <AddWorkout updateOut={this.updateOut} user={this.state}/>
         </div>

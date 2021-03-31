@@ -16,10 +16,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 //  }
 
 app.post('/food', (req, res) => {
-  const { name, measure, amount } = req.body;
-  const food = {
-    query: `${measure} ${amount} ${name}`
-  };
+  const food = req.query.query;
+  const userid = req.query.userid;
   const options = {
     method: 'post',
     headers: {

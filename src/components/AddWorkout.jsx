@@ -46,22 +46,16 @@ class AddWorkout extends React.Component {
 
     return valid;
   }
-// {
-//   "query":"swam 3 miles",
-//   "gender":"female",
-//   "weight_kg":72.5,
-//   "height_cm":167.64,
-//   "age":30
-//  }
+
   handleSubmit(event) {
     if (this.validate()) {
       const workoutObj = {
         workout: {
           query: this.state.workout,
-          // gender: this.props.user.gender,
-          // weight_kg: this.props.user.weight,
-          // height_cm: this.props.user.height,
-          // age: this.props.user.age,
+          gender: this.props.user.gender,
+          weight_kg: this.props.user.weight,
+          height_cm: this.props.user.height,
+          age: this.props.user.age,
         },
         userid: this.props.user.userid
       }
