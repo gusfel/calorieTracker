@@ -14,10 +14,13 @@ class NewUserForm extends React.Component {
       fname: '',
       lname: '',
       maxcals: '',
+      warning: false,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearState = this.clearState.bind(this);
+    this.validate = this.validate.bind(this);
   }
 
   handleInputChange(event) {
@@ -25,28 +28,70 @@ class NewUserForm extends React.Component {
     const name = target.name;
     this.setState({
       [name]: target.value,
+      warning: false,
     });
     console.log(this.state)
   }
 
-  handleSubmit(event) {
-    // const newState = {};
-    // Object.keys(this.state).forEach(key => {
-    //   newState[key] = this.state[key]
-    // })
-    const options = {
-      method: 'post',
-      url: '/newUser',
-      params: this.state,
+  clearState() {
+    this.setState({
+      userName: '',
+      password: '',
+      height: '',
+      weight: '',
+      age: '',
+      gender: '',
+      fname: '',
+      lname: '',
+      maxcals: '',
+      warning: false,
+    })
+  }
+
+  validate() {
+    const dataToCheck = this.state;
+    delete dataToCheck.warning;
+    let valid = true;
+    for (var key in dataToCheck) {
+      if (dataToCheck[key] === '') {
+        valid = false;
+      }
     }
-    axios(options)
-      .then(res => {
-        const userData = res.data;
-          userData.appStatus = ''
-          userData.userid = res.data.id
-          this.props.setUpUser(userData)
+
+    return valid;
+  }
+
+  handleSubmit(event) {
+    // this.setState({
+    //   warning: false,
+    // })
+    if (this.validate()) {
+      const options = {
+        method: 'post',
+        url: '/newUser',
+        params: this.state,
+      }
+      axios(options)
+        .then(res => {
+          if (res.data === 'error') {
+            this.setState({
+              warning: 'username',
+            })
+          } else {
+            const userData = res.data;
+            userData.appStatus = ''
+            userData.userid = res.data.id
+            this.props.setUpUser(userData)
+            this.clearState();
+          }
+        })
+      event.preventDefault();
+    } else {
+      this.setState({
+        warning: 'missingData'
       })
-    event.preventDefault();
+      event.preventDefault();
+    }
   }
 
   render() {
@@ -75,7 +120,7 @@ class NewUserForm extends React.Component {
             </label>
             <label>
               Height:
-              <input type="text" name="height" value={this.state.height} onChange={this.handleInputChange} />
+              <input type="number" name="height" value={this.state.height} onChange={this.handleInputChange} />
             </label>
             <label>
               Weight:
@@ -83,7 +128,11 @@ class NewUserForm extends React.Component {
             </label>
             <label>
               Gender:
-              <input type="text" name="gender" value={this.state.gender} onChange={this.handleInputChange} />
+              <select name="gender" value={this.state.gender} onChange={this.handleInputChange} >
+              <option value=""></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
             </label>
             <label>
               Max Daily Calories:
@@ -91,6 +140,18 @@ class NewUserForm extends React.Component {
             </label>
             <input type="submit" value="Submit" />
           </form>
+          {this.state.warning === 'username' ?
+            <div>
+              Sorry that username is already in use, please choose another
+            </div>
+            : <></>
+          }
+          {this.state.warning === 'missingData' ?
+            <div>
+              Please make sure all forms are completed
+            </div>
+            : <></>
+          }
       </div>
     );
   }
