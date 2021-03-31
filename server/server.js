@@ -60,8 +60,10 @@ app.post('/food', (req, res) => {
           });
         }
       });
+    })
+    .catch(err => {
+      res.send('error');
     });
-    // make it post to the database
 });
 
 // {
@@ -96,12 +98,12 @@ app.post('/exercise', (req, res) => {
       VALUES(default, ${userid}, '${exerciseText}', ${calories}, '${date}')`;
       db.connect((err, client, done) => {
         if (err) {
-          console.log(err);
+          console.log('hi');
         } else {
           client.query(query, (err2, data) => {
             done();
             if (err2) {
-              console.log(err2);
+              res.send('error');
             } else {
               // console.log(data)
               res.send('success');
@@ -109,7 +111,10 @@ app.post('/exercise', (req, res) => {
           });
         }
       });
-    });
+    })
+    .catch(err => {
+      res.send('error');
+    })
 });
 
 app.get('/login', (req, res) => {

@@ -6,11 +6,11 @@ const Breakdown = (props) => {
   return (
     <div>
       <div>
-        <h2>Calories Left Today</h2>
-        <h3>{difference}</h3>
+        <span id="caloriesToday">Calories Left Today: </span>
+        <span id="caloriesLeft">{difference}</span>
       </div>
-      <h3>Calories In Today: {props.userInfo.currentIn}</h3>
-      <h3>Calories Out Today: {props.userInfo.currentOut}</h3>
+      <h3>Calories In: {props.userInfo.currentIn}</h3>
+      <h3>Calories Out: {props.userInfo.currentOut}</h3>
     </div>
   )
 }

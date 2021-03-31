@@ -86,23 +86,22 @@ class AddFood extends React.Component {
       <div>
           <form onSubmit={this.handleSubmit}>
             <label>
-              Food:
+              <h4 className="enter">Enter Food:</h4>
+              <span className="example">For example: 4 oz steak</span>
+              <br />
               <input type="text" name="food" value={this.state.food} onChange={this.handleInputChange} />
             </label>
-            {/* <label>
-              Duration (min):
-              <input type="number" name="duration" value={this.state.duration} onChange={this.handleInputChange} />
-            </label> */}
+
             <input type="submit" value="Submit" />
           </form>
           {this.state.warning === 'invalid' ?
-            <div>
+            <div className="warning">
               Sorry we couldn't find that food, please try again
             </div>
             : <></>
           }
           {this.state.warning === 'missingData' ?
-            <div>
+            <div className="warning">
               Please make sure all forms are completed
             </div>
             : <></>

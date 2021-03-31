@@ -90,23 +90,21 @@ class AddWorkout extends React.Component {
       <div>
           <form onSubmit={this.handleSubmit}>
             <label>
-              Workout:
+              <h4 className="enter">Enter Your Workout:</h4>
+              <span className="example">For example: 4 mile run</span>
+              <br />
               <input type="text" name="workout" value={this.state.workout} onChange={this.handleInputChange} />
             </label>
-            {/* <label>
-              Duration (min):
-              <input type="number" name="duration" value={this.state.duration} onChange={this.handleInputChange} />
-            </label> */}
             <input type="submit" value="Submit" />
           </form>
           {this.state.warning === 'invalid' ?
-            <div>
+            <div className="warning">
               Sorry we couldn't find that exercise, please try again
             </div>
             : <></>
           }
           {this.state.warning === 'missingData' ?
-            <div>
+            <div className="warning">
               Please make sure all forms are completed
             </div>
             : <></>

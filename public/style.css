@@ -1,3 +1,49 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.warning {
+  font-size: 12px;
+  color: red;
+}
+
+#fAndWLists {
+  display: flex;
+}
+
+#mainApp {
+  width: 50%;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+#foodList, #workoutList {
+  flex: 1;
+}
+
+#caloriesToday {
+  font-size: 30px;
+}
+
+#caloriesLeft {
+  font-size: 30px;
+  color:royalblue;
+}
+
+#breakdown {
+  text-align: center;
+}
+
+.lists {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.enter {
+  margin-bottom: 3px;
+}
+
+.example {
+  font-size: 12px;
+  margin-bottom: 3px;
+}

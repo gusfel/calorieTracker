@@ -145,13 +145,13 @@ class NewUserForm extends React.Component {
             <input type="submit" value="Submit" />
           </form>
           {this.state.warning === 'username' ?
-            <div>
+            <div className="warning">
               Sorry that username is already in use, please choose another
             </div>
             : <></>
           }
           {this.state.warning === 'missingData' ?
-            <div>
+            <div className="warning">
               Please make sure all forms are completed
             </div>
             : <></>

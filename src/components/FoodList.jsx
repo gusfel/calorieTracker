@@ -5,7 +5,9 @@ const FoodList = (props) => {
   return (
     <div>
       Today's Food
-    {props.foods.map(food => <FoodListItem key={food.id} food={food}/>)}
+      <div className="lists">
+        {props.foods.map(food => <FoodListItem key={food.id} food={food}/>)}
+    </div>
     </div>
   )
 }

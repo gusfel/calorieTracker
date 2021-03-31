@@ -62,7 +62,7 @@ class WelcomeForm extends React.Component {
             <input type="submit" value="Submit" />
           </form>
           {this.state.warning ?
-            <div>
+            <div className="warning">
               Sorry no users match that username or password, please try again
             </div>
             : <></>

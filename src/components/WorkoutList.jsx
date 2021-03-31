@@ -5,7 +5,9 @@ const WorkoutList = (props) => {
   return (
     <div>
       Today's Workouts
-      {props.workouts.map(workout => <WorkoutListItem key={workout.id} workout={workout}/>)}
+      <div className="lists">
+        {props.workouts.map(workout => <WorkoutListItem key={workout.id} workout={workout}/>)}
+      </div>
     </div>
   )
 }

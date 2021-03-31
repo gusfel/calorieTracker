@@ -128,15 +128,24 @@ class App extends React.Component {
     }
     return (
       <div>
-        <div>
+        <div id="header">
+          <h1>Most Valuable Calorie Tracker</h1>
           <button onClick={this.logOut}>Log Out</button>
         </div>
+        <div id="mainApp">
+          <div id="breakdown">
         <Breakdown userInfo={this.state}/>
-        <div>
-          <FoodList foods={this.state.food}/>
-          <AddFood userid={this.state.userid} updateIn={this.updateIn}/>
-          <WorkoutList workouts={this.state.workouts}/>
-          <AddWorkout updateOut={this.updateOut} user={this.state}/>
+        </div>
+        <div id="fAndWLists">
+          <div id="foodList">
+            <FoodList foods={this.state.food}/>
+            <AddFood userid={this.state.userid} updateIn={this.updateIn}/>
+          </div>
+          <div id="workoutList">
+            <WorkoutList workouts={this.state.workouts}/>
+            <AddWorkout updateOut={this.updateOut} user={this.state}/>
+          </div>
+        </div>
         </div>
       </div>
     )
