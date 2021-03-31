@@ -26,8 +26,15 @@ class NewUserForm extends React.Component {
   handleInputChange(event) {
     const target = event.target;
     const name = target.name;
+    let value = target.value;
+    if (name === 'height') {
+      value = value * 2.54
+    }
+    if (name === 'weight') {
+      value = value * .454
+    }
     this.setState({
-      [name]: target.value,
+      [name]: value,
       warning: false,
     });
     console.log(this.state)
@@ -62,9 +69,6 @@ class NewUserForm extends React.Component {
   }
 
   handleSubmit(event) {
-    // this.setState({
-    //   warning: false,
-    // })
     if (this.validate()) {
       const options = {
         method: 'post',
@@ -119,12 +123,12 @@ class NewUserForm extends React.Component {
               <input type="number" name="age" value={this.state.age} onChange={this.handleInputChange} />
             </label>
             <label>
-              Height:
-              <input type="number" name="height" value={this.state.height} onChange={this.handleInputChange} />
+              Height (inches):
+              <input type="number" name="height"  onChange={this.handleInputChange} />
             </label>
             <label>
-              Weight:
-              <input type="number" name="weight" value={this.state.weight} onChange={this.handleInputChange} />
+              Weight (pounds):
+              <input type="number" name="weight"  onChange={this.handleInputChange} />
             </label>
             <label>
               Gender:
