@@ -12,7 +12,7 @@ CREATE TABLE users (
  height SMALLINT,
  weight SMALLINT,
  age SMALLINT,
- gender VARCHAR,
+ gender VARCHAR(10),
  fName VARCHAR(20),
  lName VARCHAR(20),
  maxCals SMALLINT

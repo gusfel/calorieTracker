@@ -66,7 +66,6 @@ app.post('/exercise', (req, res) => {
 
 app.get('/login', (req, res) => {
   const loginInfo = req.query;
-  console.log(loginInfo);
   const query = `SELECT * FROM users WHERE username = '${loginInfo.userName}' AND password = '${loginInfo.password}'`;
   db.connect((err, client, done) => {
     if (err) {
@@ -89,7 +88,6 @@ app.get('/updateIn', (req, res) => {
   let today = new Date();
   // console.log(req)
   today = today.toLocaleDateString().slice(0, 10);
-  console.log(today)
   const query = `SELECT * FROM food where userid = ${id} AND date = '${today}'`;
   db.connect((err, client, done) => {
     if (err) {
@@ -113,7 +111,6 @@ app.get('/updateOut', (req, res) => {
   let today = new Date();
 
   today = today.toLocaleDateString().slice(0, 10);
-  console.log(today);
   const query = `SELECT * FROM workouts where userid = ${id} AND date = '${today}'`;
   db.connect((err, client, done) => {
     if (err) {
@@ -131,6 +128,39 @@ app.get('/updateOut', (req, res) => {
     }
   });
 });
+
+// userName VARCHAR(30),
+// password VARCHAR(30),
+// height SMALLINT,
+// weight SMALLINT,
+// age SMALLINT,
+// gender VARCHAR,
+// fName VARCHAR(20),
+// lName VARCHAR(20),
+// maxCals SMALLINT
+
+app.post('/newUser', (req, res) => {
+  const newUserData = req.query;
+  const query = `INSERT INTO
+  users(username, password, height, weight, age, gender, fname, lname, maxcals)
+  VALUES ('${newUserData.userName}', '${newUserData.password}', ${newUserData.height}, ${newUserData.weight}, ${newUserData.age}, '${newUserData.gender}', '${newUserData.fName}', '${newUserData.lName}', ${newUserData.maxcals})
+  RETURNING *`;
+  db.connect((err, client, done) => {
+    if (err) {
+      console.log(err);
+    } else {
+      client.query(query, (err2, data) => {
+        done();
+        if (err2) {
+          console.log(err2);
+        } else {
+          // console.log(data)
+          res.send(data.rows[0]);
+        }
+      });
+    }
+  });
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

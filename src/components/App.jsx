@@ -3,6 +3,8 @@ import WelcomeForm from './WelcomeForm.jsx'
 import Breakdown from './Breakdown.jsx'
 import axios from 'axios';
 import FoodList from './FoodList.jsx'
+import WorkoutList from './WorkoutList.jsx'
+import NewUserForm from './NewUserForm.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -108,7 +110,6 @@ class App extends React.Component {
     })
   }
 
-
   render() {
     if (this.state.appStatus === 'welcome') {
       return (
@@ -118,7 +119,9 @@ class App extends React.Component {
         )
     } else if (this.state.appStatus === 'newUser') {
       return (
-        <div>Enter Info</div>
+        <div>
+          <NewUserForm setUpUser={this.setUpUser} changeStatus={this.changeStatus}/>
+        </div>
       )
     }
     return (
@@ -128,8 +131,8 @@ class App extends React.Component {
         </div>
         <Breakdown userInfo={this.state}/>
         <div>
-          Food List
           <FoodList foods={this.state.food}/>
+          <WorkoutList workouts={this.state.workouts}/>
         </div>
       </div>
     )

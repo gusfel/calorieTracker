@@ -70,7 +70,7 @@ class WelcomeForm extends React.Component {
         </div>
         <br />
         <div>
-          <button onClick={() => {this.props.changeStatus('login')}}>New User?</button>
+          <button onClick={() => {this.props.changeStatus('newUser')}}>New User?</button>
         </div>
       </div>
     );
