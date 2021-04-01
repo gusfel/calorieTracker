@@ -178,7 +178,7 @@ class App extends React.Component {
         </div>
         <div id="mainApp">
           <div id="breakdown">
-        <Breakdown userInfo={this.state}/>
+        <Breakdown changeDate={this.changeDate} changeToToday={this.changeToToday} userInfo={this.state}/>
         </div>
         <div id="fAndWLists">
           <div id="foodList">
@@ -192,9 +192,6 @@ class App extends React.Component {
           </div>
         </div>
         </div>
-        <button onClick={() => {this.changeDate('back')}}>back</button>
-        <button onClick={() => {this.changeDate('forward')}}>forward</button>
-        <button onClick={() => {this.changeToToday()}}>today</button>
       </div>
     )
   }
