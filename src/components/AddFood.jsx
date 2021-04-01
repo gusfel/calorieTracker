@@ -7,7 +7,6 @@ class AddFood extends React.Component {
     super(props);
     this.state = {
       food: '',
-      // duration: '',
       warning: false,
     };
 
@@ -52,12 +51,10 @@ class AddFood extends React.Component {
             this.clearState();
           }
         });
-      // event.preventDefault();
     } else {
       this.setState({
         warning: 'missingData',
       });
-      // event.preventDefault();
     }
   }
 
@@ -65,10 +62,8 @@ class AddFood extends React.Component {
     const dataToCheck = this.state;
     delete dataToCheck.warning;
     let valid = true;
-    for (const key in dataToCheck) {
-      if (dataToCheck[key] === '') {
-        valid = false;
-      }
+    if (this.state.food === '') {
+      valid = false;
     }
     return valid;
   }
@@ -76,7 +71,6 @@ class AddFood extends React.Component {
   clearState() {
     this.setState({
       food: '',
-      // duration: '',
       warning: false,
     });
   }

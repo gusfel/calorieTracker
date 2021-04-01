@@ -56,7 +56,6 @@ class App extends React.Component {
     this.setState(obj);
     this.updateIn(date);
     this.updateOut(date);
-    console.log(this.state);
   }
 
   updateIn(date) {

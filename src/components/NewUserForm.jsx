@@ -41,34 +41,6 @@ class NewUserForm extends React.Component {
     console.log(this.state);
   }
 
-  clearState() {
-    this.setState({
-      userName: '',
-      password: '',
-      height: '',
-      weight: '',
-      age: '',
-      gender: '',
-      fname: '',
-      lname: '',
-      maxcals: '',
-      warning: false,
-    });
-  }
-
-  validate() {
-    const dataToCheck = this.state;
-    delete dataToCheck.warning;
-    let valid = true;
-    for (const key in dataToCheck) {
-      if (dataToCheck[key] === '') {
-        valid = false;
-      }
-    }
-
-    return valid;
-  }
-
   handleSubmit(event) {
     if (this.validate()) {
       const options = {
@@ -97,6 +69,33 @@ class NewUserForm extends React.Component {
       });
       event.preventDefault();
     }
+  }
+
+  clearState() {
+    this.setState({
+      userName: '',
+      password: '',
+      height: '',
+      weight: '',
+      age: '',
+      gender: '',
+      fname: '',
+      lname: '',
+      maxcals: '',
+      warning: false,
+    });
+  }
+
+  validate() {
+    const dataToCheck = this.state;
+    delete dataToCheck.warning;
+    let valid = true;
+    Object.keys(dataToCheck).forEach((key) => {
+      if (dataToCheck[key] === '') {
+        valid = false;
+      }
+    });
+    return valid;
   }
 
   render() {

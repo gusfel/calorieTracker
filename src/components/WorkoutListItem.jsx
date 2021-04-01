@@ -1,10 +1,10 @@
 import React from 'react';
 
-const WorkoutListItem = (props) => (
+const WorkoutListItem = ({ workout }) => (
   <div>
     <div className="ListItem">
-      <span className="itemName">{props.workout.exercise}</span>
-      <span className="itemCals">{props.workout.caloriesout}</span>
+      <span className="itemName">{workout.exercise}</span>
+      <span className="itemCals">{workout.caloriesout.toLocaleString()}</span>
     </div>
     <div className="divider" />
   </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import WorkoutListItem from './WorkoutListItem.jsx';
 
-const WorkoutList = (props) => (
+const WorkoutList = ({ workouts }) => (
   <div>
     <p className="listHeader">Today's Workouts</p>
     <div className="listTitles">
@@ -13,7 +13,7 @@ const WorkoutList = (props) => (
       </span>
     </div>
     <div className="lists">
-      {props.workouts.map((workout) => <WorkoutListItem key={workout.id} workout={workout} />)}
+      {workouts.map((workout) => <WorkoutListItem key={workout.id} workout={workout} />)}
     </div>
   </div>
 );

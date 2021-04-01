@@ -27,27 +27,6 @@ class AddWorkout extends React.Component {
     console.log(this.state);
   }
 
-  clearState() {
-    this.setState({
-      workout: '',
-      // duration: '',
-      warning: false,
-    });
-  }
-
-  validate() {
-    const dataToCheck = this.state;
-    delete dataToCheck.warning;
-    let valid = true;
-    for (const key in dataToCheck) {
-      if (dataToCheck[key] === '') {
-        valid = false;
-      }
-    }
-
-    return valid;
-  }
-
   handleSubmit() {
     if (this.validate()) {
       const workoutObj = {
@@ -73,7 +52,6 @@ class AddWorkout extends React.Component {
               warning: 'invalid',
             });
           } else {
-            console.log(res.data);
             this.props.updateOut(this.props.displayDate);
             this.clearState();
           }
@@ -83,6 +61,24 @@ class AddWorkout extends React.Component {
         warning: 'missingData',
       });
     }
+  }
+
+  clearState() {
+    this.setState({
+      workout: '',
+      // duration: '',
+      warning: false,
+    });
+  }
+
+  validate() {
+    const dataToCheck = this.state;
+    delete dataToCheck.warning;
+    let valid = true;
+    if (this.state.workout === '') {
+      valid = false;
+    }
+    return valid;
   }
 
   render() {

@@ -121,9 +121,6 @@ app.get('/login', (req, res) => {
 app.get('/updateIn', (req, res) => {
   const id = Number(req.query.id);
   const { date } = req.query;
-  // let today = new Date();
-  // console.log(req)
-  // today = today.toLocaleDateString().slice(0, 10);
   const query = `SELECT * FROM food where userid = ${id} AND date = '${date}'`;
   db.connect((err, client, done) => {
     if (err) {
@@ -134,7 +131,6 @@ app.get('/updateIn', (req, res) => {
         if (err2) {
           console.log(err2);
         } else {
-          // console.log(data.rows)
           res.send(data.rows);
         }
       });

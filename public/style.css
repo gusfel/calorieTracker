@@ -179,7 +179,7 @@ select {
 }
 
 .itemName, .leftSubtitle {
-  width: 180px;
+  width: 200px;
   display: inline-block;
 }
 .itemCals, .rightSubtitle {
@@ -189,6 +189,7 @@ select {
 .listHeader {
   margin-top: 0;
   margin-bottom: 5px;
+  font-style: italic;
 }
 
 .divider {

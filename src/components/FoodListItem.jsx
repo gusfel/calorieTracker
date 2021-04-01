@@ -1,11 +1,11 @@
 import React from 'react';
 
-const FoodListItem = (props) => (
+const FoodListItem = ({ food }) => (
   <div>
     <div className="ListItem">
 
-      <span className="itemName">{props.food.foodname}</span>
-      <span className="itemCals">{props.food.caloriesin}</span>
+      <span className="itemName">{food.foodname}</span>
+      <span className="itemCals">{food.caloriesin.toLocaleString()}</span>
     </div>
     <div className="divider" />
   </div>
