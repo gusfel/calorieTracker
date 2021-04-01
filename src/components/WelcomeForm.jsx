@@ -44,7 +44,7 @@ class WelcomeForm extends React.Component {
           })
         }
       })
-    event.preventDefault();
+    // event.preventDefault();
   }
 
   render() {
@@ -77,7 +77,7 @@ class WelcomeForm extends React.Component {
           </div>
           <div id="welcomeDivider"/>
           <div id="loginNewUserBtn">
-            <CoolButton name={'New User?'} func={() => {this.props.changeStatus('newUser')}}/>
+            <CoolButton type="submit" name={'New User?'} func={() => {this.props.changeStatus('newUser')}}/>
           </div>
         </div>
       </div>

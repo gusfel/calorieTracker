@@ -48,13 +48,14 @@ class AddFood extends React.Component {
     return valid;
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     if (this.validate()) {
       const foodObj = {
         query: {
           query: this.state.food,
         },
-        userid: this.props.userid
+        userid: this.props.userid,
+        date: this.props.displayDate,
         }
       const options = {
         method: 'post',
@@ -68,17 +69,16 @@ class AddFood extends React.Component {
               warning: 'invalid',
             })
           } else {
-            console.log(res.data)
-            this.props.updateIn();
+            this.props.updateIn(this.props.displayDate);
             this.clearState();
           }
         })
-      event.preventDefault();
+      // event.preventDefault();
     } else {
       this.setState({
         warning: 'missingData'
       })
-      event.preventDefault();
+      // event.preventDefault();
     }
   }
 

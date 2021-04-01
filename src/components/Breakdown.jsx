@@ -6,7 +6,10 @@ const Breakdown = (props) => {
   return (
     <div>
       <div id="breakdownTop">
+        {props.userInfo.date === props.userInfo.displayDate ?
         <span id="caloriesToday">Calories Left Today: </span>
+        : <span id="caloriesToday">Calories Left on {props.userInfo.displayDate}: </span>
+        }
         {difference < 0 ?
           <span style={{color: 'red'}} id="caloriesLeft">{difference}</span>
           : <span id="caloriesLeft">{difference}</span>

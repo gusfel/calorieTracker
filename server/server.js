@@ -19,6 +19,7 @@ app.post('/food', (req, res) => {
   const food = req.query.query;
   const foodText = JSON.parse(food).query;
   const userid = req.query.userid;
+  const date = req.query.date;
   const options = {
     method: 'post',
     headers: {
@@ -29,19 +30,9 @@ app.post('/food', (req, res) => {
     data: food,
     url: 'https://trackapi.nutritionix.com/v2/natural/nutrients/'
   };
-
-//   id BIGSERIAL,
-//  userId SMALLINT,
-//  foodName VARCHAR(30),
-//  amount SMALLINT,
-//  unit VARCHAR(20),
-//  caloriesIn SMALLINT,
-//  date DATE
   axios(options)
     .then(response => {
       const calories = response.data.foods[0].nf_calories;
-      let date = new Date();
-      date = date.toLocaleDateString().slice(0, 10);
       const query = `INSERT INTO
       food( userid, foodname, caloriesin, date)
       VALUES( ${userid}, '${foodText}', ${calories}, '${date}')`;
@@ -66,18 +57,11 @@ app.post('/food', (req, res) => {
     });
 });
 
-// {
-//   "query":"swam 3 miles",
-//   "gender":"female",
-//   "weight_kg":72.5,
-//   "height_cm":167.64,
-//   "age":30
-//  }
-
 app.post('/exercise', (req, res) => {
   const exercise = req.query.workout;
   const exerciseText = JSON.parse(exercise).query;
   const userid = req.query.userid;
+  const date = req.query.date;
   const options = {
     method: 'post',
     headers: {
@@ -91,8 +75,6 @@ app.post('/exercise', (req, res) => {
   axios(options)
     .then(response => {
       const calories = (response.data.exercises[0].nf_calories);
-      let date = new Date();
-      date = date.toLocaleDateString().slice(0, 10);
       const query = `INSERT INTO
       workouts(id, userid, exercise, caloriesout, date)
       VALUES(default, ${userid}, '${exerciseText}', ${calories}, '${date}')`;
@@ -138,10 +120,11 @@ app.get('/login', (req, res) => {
 
 app.get('/updateIn', (req, res) => {
   const id = Number(req.query.id);
-  let today = new Date();
+  const date = (req.query.date);
+  // let today = new Date();
   // console.log(req)
-  today = today.toLocaleDateString().slice(0, 10);
-  const query = `SELECT * FROM food where userid = ${id} AND date = '${today}'`;
+  // today = today.toLocaleDateString().slice(0, 10);
+  const query = `SELECT * FROM food where userid = ${id} AND date = '${date}'`;
   db.connect((err, client, done) => {
     if (err) {
       console.log(err);
@@ -161,10 +144,11 @@ app.get('/updateIn', (req, res) => {
 
 app.get('/updateOut', (req, res) => {
   const id = Number(req.query.id);
-  let today = new Date();
-
-  today = today.toLocaleDateString().slice(0, 10);
-  const query = `SELECT * FROM workouts where userid = ${id} AND date = '${today}'`;
+  const date = (req.query.date);
+  // let today = new Date();
+  // console.log('hi' + date)
+  // today = today.toLocaleDateString().slice(0, 10);
+  const query = `SELECT * FROM workouts where userid = ${id} AND date = '${date}'`;
   db.connect((err, client, done) => {
     if (err) {
       console.log(err);

@@ -48,7 +48,7 @@ class AddWorkout extends React.Component {
     return valid;
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     if (this.validate()) {
       const workoutObj = {
         workout: {
@@ -58,7 +58,8 @@ class AddWorkout extends React.Component {
           height_cm: this.props.user.height,
           age: this.props.user.age,
         },
-        userid: this.props.user.userid
+        userid: this.props.user.userid,
+        date: this.props.displayDate,
       }
       const options = {
         method: 'post',
@@ -73,16 +74,14 @@ class AddWorkout extends React.Component {
             })
           } else {
             console.log(res.data)
-            this.props.updateOut();
+            this.props.updateOut(this.props.displayDate);
             this.clearState();
           }
         })
-      event.preventDefault();
     } else {
       this.setState({
         warning: 'missingData'
       })
-      event.preventDefault();
     }
   }
 
