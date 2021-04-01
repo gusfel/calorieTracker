@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import CoolButton from '../CoolButton.jsx'
+import CoolButton from '../CoolButton.jsx';
 
 class WelcomeForm extends React.Component {
   constructor(props) {
@@ -16,8 +16,8 @@ class WelcomeForm extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
-    const name = target.name;
+    const { target } = event;
+    const { name } = target;
     this.setState({
       [name]: target.value,
     });
@@ -27,24 +27,24 @@ class WelcomeForm extends React.Component {
     const options = {
       method: 'get',
       url: '/login',
-      params: this.state
-    }
+      params: this.state,
+    };
     axios(options)
-      .then(res => {
+      .then((res) => {
         if (res.data) {
           const userData = res.data;
-          userData.appStatus = ''
-          userData.userid = res.data.id
-          this.props.setUpUser(userData)
+          userData.appStatus = '';
+          userData.userid = res.data.id;
+          this.props.setUpUser(userData);
         } else {
-          //show warning
-          console.log('sorry')
+          // show warning
+          console.log('sorry');
           this.setState({
             warning: true,
-          })
+          });
         }
-      })
-    event.preventDefault();
+      });
+    // event.preventDefault();
   }
 
   render() {
@@ -60,24 +60,25 @@ class WelcomeForm extends React.Component {
           <div id="loginDiv">
             <form onSubmit={this.handleSubmit}>
               {/* <label> */}
-                <input type="text" placeholder="Username" name="userName" value={this.state.userName} onChange={this.handleInputChange} />
+              <input type="text" placeholder="Username" name="userName" value={this.state.userName} onChange={this.handleInputChange} />
               {/* </label> */}
               <br />
               {/* <label> */}
-                <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleInputChange} />
+              <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleInputChange} />
               {/* </label> */}
             </form>
-            <CoolButton name={'Enter'} func={this.handleSubmit}/>
-            {this.state.warning ?
-              <div className="warning">
-                Sorry no users match that username or password, please try again
-              </div>
-              : <></>
-            }
+            <CoolButton name="Enter" func={this.handleSubmit} />
+            {this.state.warning
+              ? (
+                <div className="warning">
+                  Sorry no users match that username or password, please try again
+                </div>
+              )
+              : <></>}
           </div>
-          <div id="welcomeDivider"/>
+          <div id="welcomeDivider" />
           <div id="loginNewUserBtn">
-            <CoolButton name={'New User?'} func={() => {this.props.changeStatus('newUser')}}/>
+            <CoolButton type="submit" name="New User?" func={() => { this.props.changeStatus('newUser'); }} />
           </div>
         </div>
       </div>

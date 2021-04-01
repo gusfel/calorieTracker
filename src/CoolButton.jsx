@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CoolButton = ({
-  func, text, name
+  func, name,
 }) => (
   <div
     role="button"
     tabIndex="0"
     className="acontainer"
-    onClick={() => {func()}}
+    onClick={() => { func(); }}
+    onKeyDown={() => { func(); }}
   >
     <div className="acenter">
       <button type="button" className="abtn">
@@ -25,13 +26,6 @@ const CoolButton = ({
 CoolButton.propTypes = {
   func: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  sendClickData: PropTypes.func,
-  text: PropTypes.string,
-};
-
-CoolButton.defaultProps = {
-  text: '',
-  sendClickData: () => {},
 };
 
 export default CoolButton;

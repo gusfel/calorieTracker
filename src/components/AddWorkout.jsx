@@ -18,13 +18,13 @@ class AddWorkout extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
-    const name = target.name;
+    const { target } = event;
+    const { name } = target;
     this.setState({
       [name]: target.value,
       warning: false,
     });
-    console.log(this.state)
+    console.log(this.state);
   }
 
   clearState() {
@@ -32,14 +32,14 @@ class AddWorkout extends React.Component {
       workout: '',
       // duration: '',
       warning: false,
-    })
+    });
   }
 
   validate() {
     const dataToCheck = this.state;
     delete dataToCheck.warning;
     let valid = true;
-    for (var key in dataToCheck) {
+    for (const key in dataToCheck) {
       if (dataToCheck[key] === '') {
         valid = false;
       }
@@ -48,7 +48,7 @@ class AddWorkout extends React.Component {
     return valid;
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     if (this.validate()) {
       const workoutObj = {
         workout: {
@@ -58,58 +58,59 @@ class AddWorkout extends React.Component {
           height_cm: this.props.user.height,
           age: this.props.user.age,
         },
-        userid: this.props.user.userid
-      }
+        userid: this.props.user.userid,
+        date: this.props.displayDate,
+      };
       const options = {
         method: 'post',
         url: '/exercise',
         params: workoutObj,
-      }
+      };
       axios(options)
-        .then(res => {
+        .then((res) => {
           if (res.data === 'error') {
             this.setState({
               warning: 'invalid',
-            })
+            });
           } else {
-            console.log(res.data)
-            this.props.updateOut();
+            console.log(res.data);
+            this.props.updateOut(this.props.displayDate);
             this.clearState();
           }
-        })
-      event.preventDefault();
+        });
     } else {
       this.setState({
-        warning: 'missingData'
-      })
-      event.preventDefault();
+        warning: 'missingData',
+      });
     }
   }
 
   render() {
     return (
       <div>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              <h4 className="enter">Enter Your Workout:</h4>
-              <span className="example">For example: 4 mile run</span>
-              <br />
-              <input type="text" name="workout" value={this.state.workout} onChange={this.handleInputChange} />
-            </label>
-            <CoolButton name="Submit" func={this.handleSubmit}/>
-          </form>
-          {this.state.warning === 'invalid' ?
+        <form id="addWorkoutForm" onSubmit={this.handleSubmit}>
+          <label>
+            <h4 className="enter">Enter Your Workout:</h4>
+            <span className="example">For example: 4 mile run</span>
+            <br />
+            <input type="text" name="workout" value={this.state.workout} onChange={this.handleInputChange} />
+          </label>
+          <CoolButton name="Submit" func={this.handleSubmit} />
+        </form>
+        {this.state.warning === 'invalid'
+          ? (
             <div className="warning">
               Sorry we couldn't find that exercise, please try again
             </div>
-            : <></>
-          }
-          {this.state.warning === 'missingData' ?
+          )
+          : <></>}
+        {this.state.warning === 'missingData'
+          ? (
             <div className="warning">
               Please make sure all forms are completed
             </div>
-            : <></>
-          }
+          )
+          : <></>}
       </div>
     );
   }
