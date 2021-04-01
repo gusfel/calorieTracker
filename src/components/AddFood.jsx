@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import CoolButton from '../CoolButton.jsx'
+import CoolButton from '../CoolButton.jsx';
 
 class AddFood extends React.Component {
   constructor(props) {
@@ -18,34 +18,13 @@ class AddFood extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
-    const name = target.name;
+    const { target } = event;
+    const { name } = target;
     this.setState({
       [name]: target.value,
       warning: false,
     });
-    console.log(this.state)
-  }
-
-  clearState() {
-    this.setState({
-      food: '',
-      // duration: '',
-      warning: false,
-    })
-  }
-
-  validate() {
-    const dataToCheck = this.state;
-    delete dataToCheck.warning;
-    let valid = true;
-    for (var key in dataToCheck) {
-      if (dataToCheck[key] === '') {
-        valid = false;
-      }
-    }
-
-    return valid;
+    console.log(this.state);
   }
 
   handleSubmit() {
@@ -56,56 +35,78 @@ class AddFood extends React.Component {
         },
         userid: this.props.userid,
         date: this.props.displayDate,
-        }
+      };
       const options = {
         method: 'post',
         url: '/food',
         params: foodObj,
-      }
+      };
       axios(options)
-        .then(res => {
+        .then((res) => {
           if (res.data === 'error') {
             this.setState({
               warning: 'invalid',
-            })
+            });
           } else {
             this.props.updateIn(this.props.displayDate);
             this.clearState();
           }
-        })
+        });
       // event.preventDefault();
     } else {
       this.setState({
-        warning: 'missingData'
-      })
+        warning: 'missingData',
+      });
       // event.preventDefault();
     }
+  }
+
+  validate() {
+    const dataToCheck = this.state;
+    delete dataToCheck.warning;
+    let valid = true;
+    for (const key in dataToCheck) {
+      if (dataToCheck[key] === '') {
+        valid = false;
+      }
+    }
+    return valid;
+  }
+
+  clearState() {
+    this.setState({
+      food: '',
+      // duration: '',
+      warning: false,
+    });
   }
 
   render() {
     return (
       <div>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              <h4 className="enter">Enter Food:</h4>
-              <span className="example">For example: 4 oz steak</span>
-              <br />
-              <input type="text" name="food" value={this.state.food} onChange={this.handleInputChange} />
-          <CoolButton name="Submit" func={this.handleSubmit}/>
-            </label>
-          </form>
-          {this.state.warning === 'invalid' ?
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            <h4 className="enter">Enter Food:</h4>
+            <span className="example">For example: 4 oz steak</span>
+            <br />
+            <input type="text" name="food" value={this.state.food} onChange={this.handleInputChange} />
+            <CoolButton name="Submit" func={this.handleSubmit} />
+          </label>
+        </form>
+        {this.state.warning === 'invalid'
+          ? (
             <div className="warning">
               Sorry we couldn't find that food, please try again
             </div>
-            : <></>
-          }
-          {this.state.warning === 'missingData' ?
+          )
+          : <></>}
+        {this.state.warning === 'missingData'
+          ? (
             <div className="warning">
               Please make sure all forms are completed
             </div>
-            : <></>
-          }
+          )
+          : <></>}
       </div>
     );
   }

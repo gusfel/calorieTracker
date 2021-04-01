@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CoolButton = ({
-  func, text, name
+  func, text, name,
 }) => (
   <div
     role="button"
     tabIndex="0"
     className="acontainer"
-    onClick={() => {func()}}
+    onClick={() => { func(); }}
   >
     <div className="acenter">
       <button type="button" className="abtn">
