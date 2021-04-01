@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import CoolButton from '../CoolButton.jsx'
 
 class WelcomeForm extends React.Component {
   constructor(props) {
@@ -49,28 +50,35 @@ class WelcomeForm extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Username:
-              <input type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange} />
-            </label>
-            <label>
-              Password:
-              <input type="text" name="password" value={this.state.password} onChange={this.handleInputChange} />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-          {this.state.warning ?
-            <div className="warning">
-              Sorry no users match that username or password, please try again
-            </div>
-            : <></>
-          }
+        <div id="newUserTitle">
+          Most Valuable Calorie Tracker
         </div>
-        <br />
-        <div>
-          <button onClick={() => {this.props.changeStatus('newUser')}}>New User?</button>
+        <div id="welcomeSubtitle">
+          Welcome Back!
+        </div>
+        <div id="loginSections">
+          <div id="loginDiv">
+            <form onSubmit={this.handleSubmit}>
+              {/* <label> */}
+                <input type="text" placeholder="Username" name="userName" value={this.state.userName} onChange={this.handleInputChange} />
+              {/* </label> */}
+              <br />
+              {/* <label> */}
+                <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleInputChange} />
+              {/* </label> */}
+            </form>
+            <CoolButton name={'Enter'} func={this.handleSubmit}/>
+            {this.state.warning ?
+              <div className="warning">
+                Sorry no users match that username or password, please try again
+              </div>
+              : <></>
+            }
+          </div>
+          <div id="welcomeDivider"/>
+          <div id="loginNewUserBtn">
+            <CoolButton name={'New User?'} func={() => {this.props.changeStatus('newUser')}}/>
+          </div>
         </div>
       </div>
     );

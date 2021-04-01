@@ -3,7 +3,11 @@ import React from 'react';
 const WorkoutListItem = props => {
   return(
     <div>
-      {props.workout.exercise}: Calories Out: {props.workout.caloriesout}
+      <div className="ListItem">
+        <span className="itemName">{props.workout.exercise}</span>
+        <span className="itemCals">{props.workout.caloriesout}</span>
+      </div>
+      <div className="divider"/>
     </div>
   )
 }

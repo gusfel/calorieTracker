@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import CoolButton from '../CoolButton.jsx';
 
 class AddWorkout extends React.Component {
   constructor(props) {
@@ -95,7 +96,7 @@ class AddWorkout extends React.Component {
               <br />
               <input type="text" name="workout" value={this.state.workout} onChange={this.handleInputChange} />
             </label>
-            <input type="submit" value="Submit" />
+            <CoolButton name="Submit" func={this.handleSubmit}/>
           </form>
           {this.state.warning === 'invalid' ?
             <div className="warning">

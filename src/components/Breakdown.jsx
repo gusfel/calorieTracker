@@ -5,12 +5,18 @@ const Breakdown = (props) => {
 
   return (
     <div>
-      <div>
+      <div id="breakdownTop">
         <span id="caloriesToday">Calories Left Today: </span>
-        <span id="caloriesLeft">{difference}</span>
+        {difference < 0 ?
+          <span style={{color: 'red'}} id="caloriesLeft">{difference}</span>
+          : <span id="caloriesLeft">{difference}</span>
+        }
+        {/* <span id="caloriesLeft">{difference}</span> */}
       </div>
-      <h3>Calories In: {props.userInfo.currentIn}</h3>
-      <h3>Calories Out: {props.userInfo.currentOut}</h3>
+      <div id="counters">
+        <div className="counter">Calories In: {props.userInfo.currentIn}</div>
+        <div className="counter">Calories Out: {props.userInfo.currentOut}</div>
+      </div>
     </div>
   )
 }

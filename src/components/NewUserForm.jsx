@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import CoolButton from '../CoolButton.jsx'
 
 class NewUserForm extends React.Component {
   constructor(props) {
@@ -100,50 +101,72 @@ class NewUserForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="newUserPage">
+        <div id="newUserTitle">
+          Most Valuable Calorie Tracker
+        </div>
+        <div id="newUserSubtitle">
+          New User Sign Up
+        </div>
+        <div id="newUserForm">
           <form onSubmit={this.handleSubmit}>
+          <div role="group">
             <label>
-              Username:
+              Username:&nbsp;
               <input type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange} />
             </label>
             <label>
-              Password:
-              <input type="text" name="password" value={this.state.password} onChange={this.handleInputChange} />
+              Password:&nbsp;
+              <input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
             </label>
+            </div>
+            <div className="divider"/>
+            <div role="group">
             <label>
-              First Name:
+              First Name:&nbsp;
               <input type="text" name="fname" value={this.state.fname} onChange={this.handleInputChange} />
             </label>
             <label>
-              Last Name:
+              Last Name:&nbsp;
               <input type="text" name="lname" value={this.state.lname} onChange={this.handleInputChange} />
             </label>
+            </div>
+            <div className="divider"/>
+            <div role="group">
             <label>
-              Age:
+              Age:&nbsp;
               <input type="number" name="age" value={this.state.age} onChange={this.handleInputChange} />
             </label>
             <label>
-              Height (inches):
-              <input type="number" name="height"  onChange={this.handleInputChange} />
-            </label>
-            <label>
-              Weight (pounds):
-              <input type="number" name="weight"  onChange={this.handleInputChange} />
-            </label>
-            <label>
-              Gender:
+              Gender:&nbsp;
               <select name="gender" value={this.state.gender} onChange={this.handleInputChange} >
               <option value=""></option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
             </label>
+            </div>
+            <div className="divider"/>
+            <div role="group">
             <label>
-              Max Daily Calories:
+              Height <span className="newUserMeasure">(inches)</span>:&nbsp;
+              <input type="number" name="height"  onChange={this.handleInputChange} />
+            </label>
+            <label>
+              Weight <span className="newUserMeasure">(pounds)</span>:&nbsp;
+              <input type="number" name="weight"  onChange={this.handleInputChange} />
+            </label>
+            </div>
+            <div className="divider"/>
+            <div id="newUserMaxCals">
+            <label>
+              Max Daily Calories:&nbsp;
               <input type="number" name="maxcals" value={this.state.maxcals} onChange={this.handleInputChange} />
             </label>
-            <input type="submit" value="Submit" />
+            </div>
+            <CoolButton name={'Submit'} func={this.handleSubmit}/>
           </form>
+          </div>
           {this.state.warning === 'username' ?
             <div className="warning">
               Sorry that username is already in use, please choose another
@@ -152,7 +175,7 @@ class NewUserForm extends React.Component {
           }
           {this.state.warning === 'missingData' ?
             <div className="warning">
-              Please make sure all forms are completed
+              Please make sure all forms are completed before submitting
             </div>
             : <></>
           }

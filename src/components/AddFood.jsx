@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import CoolButton from '../CoolButton.jsx'
 
 class AddFood extends React.Component {
   constructor(props) {
@@ -90,9 +91,8 @@ class AddFood extends React.Component {
               <span className="example">For example: 4 oz steak</span>
               <br />
               <input type="text" name="food" value={this.state.food} onChange={this.handleInputChange} />
+          <CoolButton name="Submit" func={this.handleSubmit}/>
             </label>
-
-            <input type="submit" value="Submit" />
           </form>
           {this.state.warning === 'invalid' ?
             <div className="warning">

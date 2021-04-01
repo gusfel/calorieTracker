@@ -7,6 +7,7 @@ import WorkoutList from './WorkoutList.jsx'
 import NewUserForm from './NewUserForm.jsx'
 import AddWorkout from './AddWorkout.jsx'
 import AddFood from './AddFood.jsx'
+import CoolButton from '../CoolButton.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class App extends React.Component {
       lname: '',
       maxcals: null,
       appStatus: '',
+      // appStatus: 'newUser',
       // appStatus: 'welcome',
       currentIn: 0,
       currentOut: 0,
@@ -129,8 +131,12 @@ class App extends React.Component {
     return (
       <div>
         <div id="header">
-          <h1>Most Valuable Calorie Tracker</h1>
-          <button onClick={this.logOut}>Log Out</button>
+
+          <span id="pageTitle">Most Valuable Calorie Tracker</span>
+          {/* <button id="logout" onClick={this.logOut}>Log Out</button> */}
+          <div id="logOutBtn">
+            <CoolButton id="logout" func={this.logOut} name={'Log Out'} />
+          </div>
         </div>
         <div id="mainApp">
           <div id="breakdown">
@@ -141,6 +147,7 @@ class App extends React.Component {
             <FoodList foods={this.state.food}/>
             <AddFood userid={this.state.userid} updateIn={this.updateIn}/>
           </div>
+          <div id="listDivider"/>
           <div id="workoutList">
             <WorkoutList workouts={this.state.workouts}/>
             <AddWorkout updateOut={this.updateOut} user={this.state}/>

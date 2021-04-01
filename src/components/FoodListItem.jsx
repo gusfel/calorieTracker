@@ -3,8 +3,12 @@ import React from 'react';
 const FoodListItem = (props) => {
   return (
     <div>
-      {props.food.foodname}: {props.food.amount} {props.food.unit}
-      Total Calories In: {props.food.caloriesin}
+      <div className="ListItem">
+
+        <span className="itemName">{props.food.foodname}</span>
+        <span className="itemCals">{props.food.caloriesin}</span>
+      </div>
+      <div className="divider"/>
     </div>
   )
 }

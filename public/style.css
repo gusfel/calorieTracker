@@ -17,6 +17,101 @@ body {
   margin-right: auto;
 }
 
+#newUserForm {
+  width: 50%;
+  margin-left:auto;
+  margin-right: auto;
+  height: 500px;
+  display:flex;
+  justify-content:space-evenly;
+  font-size: 20px;
+  margin-top: 25px;
+  border: solid red 2px;
+  border-radius: 20px;
+}
+
+#newUserForm form {
+  width: 80%;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  height: 400px;
+}
+
+#newUserForm .divider {
+  margin-bottom: 10px;
+}
+
+input {
+  height: 30px;
+  font-size: 20px;
+  width: 150px;
+  border: none;
+  border-bottom: 2px solid red;
+  outline: none;
+}
+
+#newUserTitle {
+  text-align: center;
+  font-size: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#newUserSubmit {
+  align-self: center;
+  position:relative;
+}
+
+fieldset {
+  display: flex;
+}
+
+fieldset input {
+  flex: 1;
+}
+
+#newUserForm form input[type='number'] {
+  width: 80px
+}
+
+div[role='group']{
+  display: flex;
+  flex-flow: row wrap;
+  height: 50px;
+  /* flex: 1; */
+  position: relative;
+}
+
+div[role='group'] label{
+  flex: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#newUserPage .warning {
+  text-align: center;
+}
+
+#newUserMaxCals{
+  flex: none;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+select {
+  border: none;
+  font-size: 20px;
+  border-bottom: solid red 2px;
+  outline: none;
+  height: 32px;
+}
+
+
 #foodList, #workoutList {
   flex: 1;
 }
@@ -46,4 +141,232 @@ body {
 .example {
   font-size: 12px;
   margin-bottom: 3px;
+}
+
+ .ListItem, .listTitles {
+  display: inline-block;
+}
+/*
+.itemName, .itemCals, .leftSubtitle, .rightSubtitle {
+  flex: 1
+} */
+
+#pageTitle {
+  font-size: 50px;
+}
+
+#header {
+  text-align: center;
+  margin-top: 75px;
+}
+
+#newUserSubtitle, #welcomeSubtitle {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 40px;
+  font-style: italic;
+}
+
+.newUserMeasure {
+  font-size: 12px;
+}
+
+
+
+#logout {
+  float: right;
+}
+
+.itemName, .leftSubtitle {
+  width: 180px;
+  display: inline-block;
+}
+.itemCals, .rightSubtitle {
+  width: fit-content;
+}
+
+.listHeader {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.divider {
+  width: auto;
+  height: 2px;
+  background-color: lightgray;
+}
+
+#counters {
+  display: flex;
+}
+
+.counter {
+  flex: 1;
+}
+
+.acontainer {
+  width: 150px;
+  height: 38px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.acenter {
+  width: 150px;
+  height: 38px;
+  position: absolute;
+}
+
+.abtn {
+  width: 150px;
+  height: 38px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid black;
+  outline: none;
+  transition: 1s ease-in-out;
+}
+
+.abtn svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 1s ease-in-out;
+}
+
+.abtn:hover {
+  transition: 1s ease-in-out;
+  background: red;
+}
+
+.abtn:hover svg {
+  stroke-dashoffset: -480;
+}
+
+.abtn span {
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.abtn:hover span {
+  transition: 1s ease-in-out;
+  color: white;
+}
+
+#loginDiv {
+  width: fit-content;
+  margin: auto;
+}
+
+#loginDiv .acontainer {
+  margin: 15px auto;
+
+}
+
+#loginDiv input {
+  height: 30px;
+  font-size: 20px;
+  width: 150px;
+  border: none;
+  border-bottom: 2px solid red;
+  outline: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginDiv form {
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#loginSections {
+  display: flex;
+  width: 40%;
+  margin: 10% auto;
+  font-size: 20px;
+}
+
+#loginDiv, #loginNewUserBtn {
+  flex: 1;
+}
+
+#loginNewUserBtn {
+  justify-content:space-around;
+  display: flex;
+  flex-direction: column;
+}
+
+#welcomeDivider {
+  width: 2px;
+  height: auto;
+  background-color: lightgray;
+
+}
+
+form .acontainer, form .acenter, form .abtn, form .abtn svg  {
+  width: 100px;
+  height: 26px;
+}
+
+#header .acontainer, #header .acenter, #header .abtn, #header .abtn svg  {
+  width: 100px;
+  height: 26px;
+}
+
+#fAndWLists .acontainer {
+  display: inline-block;
+  margin-left: 25px;
+  /* margin-right: auto; */
+}
+
+#listDivider {
+  width: 35px;
+}
+
+#breakdownTop {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+#counters {
+  margin-bottom: 10px;
+}
+
+.counter {
+  font-size: 20px;
+}
+
+.listHeader {
+  text-align: center;
+}
+
+.lists {
+  border: solid red 2px;
+  padding: 5px
+}
+
+#logOutBtn {
+  position: absolute;
+  width: fit-content;
+  right: 15%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#pageTitle, #logOutBtn {
+  display: inline-block;
+}
+
+#pageTitle {
+  position: relative;
 }
