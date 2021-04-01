@@ -47,34 +47,16 @@ class App extends React.Component {
     this.updateOut();
   }
 
-  changeStatus(str) {
-    this.setState({
-      appStatus: str,
-    });
-  }
-
-  changeDate(direction) {
-    let nextDate = new Date(this.state.displayDate);
-    if (direction === 'back') {
-      nextDate = nextDate.setDate(nextDate.getDate() - 1);
-    } else {
-      nextDate = nextDate.setDate(nextDate.getDate() + 1);
-    }
-    nextDate = new Date(nextDate);
-    nextDate = nextDate.toLocaleDateString().slice(0, 10);
-    this.setState({
-      displayDate: nextDate,
-    });
-    this.updateIn(nextDate);
-    this.updateOut(nextDate);
-  }
-
-  changeToToday() {
-    this.setState({
-      displayDate: this.state.date,
-    });
-    this.updateIn(this.state.date);
-    this.updateOut(this.state.date);
+  setUpUser(obj) {
+    let date = new Date();
+    date = date.toLocaleDateString().slice(0, 10);
+    obj.date = date;
+    obj.displayDate = date;
+    console.log(date);
+    this.setState(obj);
+    this.updateIn(date);
+    this.updateOut(date);
+    console.log(this.state);
   }
 
   updateIn(date) {
@@ -100,6 +82,55 @@ class App extends React.Component {
       });
   }
 
+  changeToToday() {
+    this.setState({
+      displayDate: this.state.date,
+    });
+    this.updateIn(this.state.date);
+    this.updateOut(this.state.date);
+  }
+
+  changeDate(direction) {
+    let nextDate = new Date(this.state.displayDate);
+    if (direction === 'back') {
+      nextDate = nextDate.setDate(nextDate.getDate() - 1);
+    } else {
+      nextDate = nextDate.setDate(nextDate.getDate() + 1);
+    }
+    nextDate = new Date(nextDate);
+    nextDate = nextDate.toLocaleDateString().slice(0, 10);
+    this.setState({
+      displayDate: nextDate,
+    });
+    this.updateIn(nextDate);
+    this.updateOut(nextDate);
+  }
+
+  changeStatus(str) {
+    this.setState({
+      appStatus: str,
+    });
+  }
+
+  logOut() {
+    this.setState({
+      userid: null,
+      username: '',
+      height: null,
+      weight: null,
+      age: null,
+      gender: '',
+      fname: '',
+      lname: '',
+      maxcals: null,
+      appStatus: 'welcome',
+      currentIn: 0,
+      currentOut: 0,
+      workouts: [],
+      food: [],
+    });
+  }
+
   updateOut(date) {
     const options = {
       method: 'get',
@@ -121,37 +152,6 @@ class App extends React.Component {
           currentOut: totalOut,
         });
       });
-  }
-
-  setUpUser(obj) {
-    let date = new Date();
-    date = date.toLocaleDateString().slice(0, 10);
-    obj.date = date;
-    obj.displayDate = date;
-    console.log(date);
-    this.setState(obj);
-    this.updateIn(date);
-    this.updateOut(date);
-    console.log(this.state);
-  }
-
-  logOut() {
-    this.setState({
-      userid: null,
-      username: '',
-      height: null,
-      weight: null,
-      age: null,
-      gender: '',
-      fname: '',
-      lname: '',
-      maxcals: null,
-      appStatus: 'welcome',
-      currentIn: 0,
-      currentOut: 0,
-      workouts: [],
-      food: [],
-    });
   }
 
   render() {
@@ -178,17 +178,29 @@ class App extends React.Component {
         </div>
         <div id="mainApp">
           <div id="breakdown">
-            <Breakdown changeDate={this.changeDate} changeToToday={this.changeToToday} userInfo={this.state} />
+            <Breakdown
+              changeDate={this.changeDate}
+              changeToToday={this.changeToToday}
+              userInfo={this.state}
+            />
           </div>
           <div id="fAndWLists">
             <div id="foodList">
               <FoodList foods={this.state.food} />
-              <AddFood userid={this.state.userid} displayDate={this.state.displayDate} updateIn={this.updateIn} />
+              <AddFood
+                userid={this.state.userid}
+                displayDate={this.state.displayDate}
+                updateIn={this.updateIn}
+              />
             </div>
             <div id="listDivider" />
             <div id="workoutList">
               <WorkoutList workouts={this.state.workouts} />
-              <AddWorkout displayDate={this.state.displayDate} updateOut={this.updateOut} user={this.state} />
+              <AddWorkout
+                displayDate={this.state.displayDate}
+                updateOut={this.updateOut}
+                user={this.state}
+              />
             </div>
           </div>
         </div>
