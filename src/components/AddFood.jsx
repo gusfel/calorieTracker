@@ -84,7 +84,7 @@ class AddFood extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form id="addFoodForm" onSubmit={this.handleSubmit}>
           <label>
             <h4 className="enter">Enter Food:</h4>
             <span className="example">For example: 4 oz steak</span>

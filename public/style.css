@@ -370,3 +370,36 @@ form .acontainer, form .acenter, form .abtn, form .abtn svg  {
 #pageTitle {
   position: relative;
 }
+
+.back, .forward {
+  font-family: FontAwesome;
+  content: "\f053";
+  color: red;
+  font-size: 30px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.back::before {
+  content: "\f053";
+
+}
+
+
+.forward::before {
+  content: "\f054";
+}
+
+.today {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  vertical-align: top;
+  padding-top: 0;
+  bottom: 2px;
+  position: relative;
+}
