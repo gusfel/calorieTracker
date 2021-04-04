@@ -101,8 +101,11 @@ class NewUserForm extends React.Component {
   render() {
     return (
       <div id="newUserPage">
-        <div id="newUserTitle">
-          Most Valuable Calorie Tracker
+        <div id="newUserHeader">
+          <span className="pageTitle">Most Valuable Calorie Tracker</span>
+          <div className="logOutBtn">
+            <CoolButton id="goBack" func={this.props.logOut} name="Back" />
+          </div>
         </div>
         <div id="newUserSubtitle">
           New User Sign Up

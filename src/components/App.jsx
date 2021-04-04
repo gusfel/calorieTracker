@@ -163,15 +163,20 @@ class App extends React.Component {
     } if (this.state.appStatus === 'newUser') {
       return (
         <div>
-          <NewUserForm setUpUser={this.setUpUser} changeStatus={this.changeStatus} />
+          {/* <CoolButton id="goBack" func={this.logOut} name="Go Back" /> */}
+          <NewUserForm
+            logOut={this.logOut}
+            setUpUser={this.setUpUser}
+            changeStatus={this.changeStatus}
+          />
         </div>
       );
     }
     return (
       <div>
         <div id="header">
-          <span id="pageTitle">Most Valuable Calorie Tracker</span>
-          <div id="logOutBtn">
+          <span className="pageTitle">Most Valuable Calorie Tracker</span>
+          <div className="logOutBtn">
             <CoolButton id="logout" func={this.logOut} name="Log Out" />
           </div>
         </div>

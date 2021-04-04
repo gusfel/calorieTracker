@@ -11,10 +11,6 @@ const db = require('../DB/db.js');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
-// {
-//   "query":"for breakfast i ate 2 eggs, bacon, and french toast",
-//  }
-
 app.post('/food', (req, res) => {
   const food = req.query.query;
   const foodText = JSON.parse(food).query;
@@ -38,21 +34,20 @@ app.post('/food', (req, res) => {
       VALUES( ${userid}, '${foodText}', ${calories}, '${date}')`;
       db.connect((err, client, done) => {
         if (err) {
-          console.log(err);
+          res.send(err);
         } else {
           client.query(query, (err2, data) => {
             done();
             if (err2) {
-              console.log(err2);
+              res.send(err2);
             } else {
-              // console.log(data)
               res.send('success');
             }
           });
         }
       });
     })
-    .catch((err) => {
+    .catch((aErr) => {
       res.send('error');
     });
 });
@@ -80,7 +75,7 @@ app.post('/exercise', (req, res) => {
       VALUES(default, ${userid}, '${exerciseText}', ${calories}, '${date}')`;
       db.connect((err, client, done) => {
         if (err) {
-          console.log('hi');
+          res.send(err);
         } else {
           client.query(query, (err2, data) => {
             done();
@@ -94,7 +89,7 @@ app.post('/exercise', (req, res) => {
         }
       });
     })
-    .catch((err) => {
+    .catch((aErr) => {
       res.send('error');
     });
 });
@@ -104,12 +99,12 @@ app.get('/login', (req, res) => {
   const query = `SELECT * FROM users WHERE username = '${loginInfo.userName}' AND password = '${loginInfo.password}'`;
   db.connect((err, client, done) => {
     if (err) {
-      console.log(err);
+      res.send(err);
     } else {
       client.query(query, (err2, data) => {
         done();
         if (err2) {
-          console.log(err2);
+          res.send(err2);
         } else {
           res.send(data.rows[0]);
         }
@@ -124,12 +119,12 @@ app.get('/updateIn', (req, res) => {
   const query = `SELECT * FROM food where userid = ${id} AND date = '${date}'`;
   db.connect((err, client, done) => {
     if (err) {
-      console.log(err);
+      res.send(err);
     } else {
       client.query(query, (err2, data) => {
         done();
         if (err2) {
-          console.log(err2);
+          res.send(err2);
         } else {
           res.send(data.rows);
         }
@@ -141,36 +136,22 @@ app.get('/updateIn', (req, res) => {
 app.get('/updateOut', (req, res) => {
   const id = Number(req.query.id);
   const { date } = req.query;
-  // let today = new Date();
-  // console.log('hi' + date)
-  // today = today.toLocaleDateString().slice(0, 10);
   const query = `SELECT * FROM workouts where userid = ${id} AND date = '${date}'`;
   db.connect((err, client, done) => {
     if (err) {
-      console.log(err);
+      res.send(err);
     } else {
       client.query(query, (err2, data) => {
         done();
         if (err2) {
-          console.log(err2);
+          res.send(err2);
         } else {
-          // console.log(data.rows)
           res.send(data.rows);
         }
       });
     }
   });
 });
-
-// userName VARCHAR(30),
-// password VARCHAR(30),
-// height SMALLINT,
-// weight SMALLINT,
-// age SMALLINT,
-// gender VARCHAR,
-// fName VARCHAR(20),
-// lName VARCHAR(20),
-// maxCals SMALLINT
 
 app.post('/newUser', (req, res) => {
   const newUserData = req.query;
@@ -180,14 +161,13 @@ app.post('/newUser', (req, res) => {
   RETURNING *`;
   db.connect((err, client, done) => {
     if (err) {
-      console.log(err);
+      res.send(err);
     } else {
       client.query(query, (err2, data) => {
         done();
         if (err2) {
           res.send('error');
         } else {
-          // console.log(data)
           res.send(data.rows[0]);
         }
       });

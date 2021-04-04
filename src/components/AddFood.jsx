@@ -23,7 +23,6 @@ class AddFood extends React.Component {
       [name]: target.value,
       warning: false,
     });
-    console.log(this.state);
   }
 
   handleSubmit() {

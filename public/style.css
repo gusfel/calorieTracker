@@ -17,6 +17,14 @@ body {
   margin-right: auto;
 }
 
+#newUserHeader {
+  text-align: center;
+}
+
+#newUserHeader div {
+  display: inline-block;
+}
+
 #newUserForm {
   width: 50%;
   margin-left:auto;
@@ -151,7 +159,7 @@ select {
   flex: 1
 } */
 
-#pageTitle {
+.pageTitle {
   font-size: 50px;
 }
 
@@ -171,8 +179,6 @@ select {
 .newUserMeasure {
   font-size: 12px;
 }
-
-
 
 #logout {
   float: right;
@@ -324,6 +330,11 @@ form .acontainer, form .acenter, form .abtn, form .abtn svg  {
   height: 26px;
 }
 
+#newUserHeader .acontainer, #newUserHeader .acenter, #newUserHeader .abtn, #newUserHeader .abtn svg  {
+  width: 100px;
+  height: 26px;
+}
+
 #fAndWLists .acontainer {
   display: inline-block;
   margin-left: 25px;
@@ -356,7 +367,7 @@ form .acontainer, form .acenter, form .abtn, form .abtn svg  {
   padding: 5px
 }
 
-#logOutBtn {
+.logOutBtn {
   position: absolute;
   width: fit-content;
   right: 15%;
@@ -364,11 +375,11 @@ form .acontainer, form .acenter, form .abtn, form .abtn svg  {
   margin-bottom: auto;
 }
 
-#pageTitle, #logOutBtn {
+.pageTitle, .logOutBtn {
   display: inline-block;
 }
 
-#pageTitle {
+.pageTitle {
   position: relative;
 }
 
