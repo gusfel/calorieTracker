@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import CoolButton from '../CoolButton.jsx';
+import PropTypes from 'prop-types';
+import CoolButton from '../CoolButton';
 
 class AddFood extends React.Component {
   constructor(props) {
@@ -26,13 +27,15 @@ class AddFood extends React.Component {
   }
 
   handleSubmit() {
+    const { food } = this.state;
+    const { userid, displayDate, updateIn } = this.props;
     if (this.validate()) {
       const foodObj = {
         query: {
-          query: this.state.food,
+          query: food,
         },
-        userid: this.props.userid,
-        date: this.props.displayDate,
+        userid,
+        date: displayDate,
       };
       const options = {
         method: 'post',
@@ -46,7 +49,7 @@ class AddFood extends React.Component {
               warning: 'invalid',
             });
           } else {
-            this.props.updateIn(this.props.displayDate);
+            updateIn(displayDate);
             this.clearState();
           }
         });
@@ -61,7 +64,7 @@ class AddFood extends React.Component {
     const dataToCheck = this.state;
     delete dataToCheck.warning;
     let valid = true;
-    if (this.state.food === '') {
+    if (dataToCheck.food === '') {
       valid = false;
     }
     return valid;
@@ -75,25 +78,26 @@ class AddFood extends React.Component {
   }
 
   render() {
+    const { food, warning } = this.state;
     return (
       <div>
         <form id="addFoodForm" onSubmit={this.handleSubmit}>
-          <label>
+          <label htmlFor="foodInput">
             <h4 className="enter">Enter Food:</h4>
             <span className="example">For example: 4 oz steak</span>
             <br />
-            <input type="text" name="food" value={this.state.food} onChange={this.handleInputChange} />
+            <input id="foodInput" type="text" name="food" value={food} onChange={this.handleInputChange} />
             <CoolButton name="Submit" func={this.handleSubmit} />
           </label>
         </form>
-        {this.state.warning === 'invalid'
+        {warning === 'invalid'
           ? (
             <div className="warning">
-              Sorry we couldn't find that food, please try again
+              Sorry we couldn&apos;t find that food, please try again
             </div>
           )
           : <></>}
-        {this.state.warning === 'missingData'
+        {warning === 'missingData'
           ? (
             <div className="warning">
               Please make sure all forms are completed
@@ -104,5 +108,11 @@ class AddFood extends React.Component {
     );
   }
 }
+
+AddFood.propTypes = {
+  userid: PropTypes.number.isRequired,
+  displayDate: PropTypes.string.isRequired,
+  updateIn: PropTypes.func.isRequired,
+};
 
 export default AddFood;

@@ -1,5 +1,5 @@
 import React from 'react';
-import FoodListItem from './FoodListItem.jsx';
+import FoodListItem from './FoodListItem';
 
 const FoodList = ({ foods }) => (
   <div>

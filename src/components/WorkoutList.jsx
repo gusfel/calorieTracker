@@ -1,5 +1,5 @@
 import React from 'react';
-import WorkoutListItem from './WorkoutListItem.jsx';
+import WorkoutListItem from './WorkoutListItem';
 
 const WorkoutList = ({ workouts }) => (
   <div>

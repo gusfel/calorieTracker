@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import CoolButton from '../CoolButton.jsx';
+import PropTypes from 'prop-types';
+import CoolButton from '../CoolButton';
 
 class AddWorkout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       workout: '',
-      // duration: '',
       warning: false,
     };
 
@@ -24,21 +24,22 @@ class AddWorkout extends React.Component {
       [name]: target.value,
       warning: false,
     });
-    console.log(this.state);
   }
 
   handleSubmit() {
+    const { workout } = this.state;
+    const { user, displayDate, updateOut } = this.props;
     if (this.validate()) {
       const workoutObj = {
         workout: {
-          query: this.state.workout,
-          gender: this.props.user.gender,
-          weight_kg: this.props.user.weight,
-          height_cm: this.props.user.height,
-          age: this.props.user.age,
+          query: workout,
+          gender: user.gender,
+          weight_kg: user.weight,
+          height_cm: user.height,
+          age: user.age,
         },
-        userid: this.props.user.userid,
-        date: this.props.displayDate,
+        userid: user.userid,
+        date: displayDate,
       };
       const options = {
         method: 'post',
@@ -52,7 +53,7 @@ class AddWorkout extends React.Component {
               warning: 'invalid',
             });
           } else {
-            this.props.updateOut(this.props.displayDate);
+            updateOut(displayDate);
             this.clearState();
           }
         });
@@ -66,41 +67,42 @@ class AddWorkout extends React.Component {
   clearState() {
     this.setState({
       workout: '',
-      // duration: '',
       warning: false,
     });
   }
 
   validate() {
+    const { workout } = this.state;
     const dataToCheck = this.state;
     delete dataToCheck.warning;
     let valid = true;
-    if (this.state.workout === '') {
+    if (workout === '') {
       valid = false;
     }
     return valid;
   }
 
   render() {
+    const { workout, warning } = this.state;
     return (
       <div>
         <form id="addWorkoutForm" onSubmit={this.handleSubmit}>
-          <label>
+          <label htmlFor="workoutInput">
             <h4 className="enter">Enter Your Workout:</h4>
             <span className="example">For example: 4 mile run</span>
             <br />
-            <input type="text" name="workout" value={this.state.workout} onChange={this.handleInputChange} />
+            <input id="workoutInput" type="text" name="workout" value={workout} onChange={this.handleInputChange} />
           </label>
           <CoolButton name="Submit" func={this.handleSubmit} />
         </form>
-        {this.state.warning === 'invalid'
+        {warning === 'invalid'
           ? (
             <div className="warning">
-              Sorry we couldn't find that exercise, please try again
+              Sorry we couldn&apos;t find that exercise, please try again
             </div>
           )
           : <></>}
-        {this.state.warning === 'missingData'
+        {warning === 'missingData'
           ? (
             <div className="warning">
               Please make sure all forms are completed
@@ -111,5 +113,17 @@ class AddWorkout extends React.Component {
     );
   }
 }
+
+AddWorkout.propTypes = {
+  displayDate: PropTypes.string.isRequired,
+  updateOut: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    gender: PropTypes.string,
+    weight: PropTypes.number,
+    height: PropTypes.number,
+    age: PropTypes.number,
+    userid: PropTypes.number,
+  }).isRequired,
+};
 
 export default AddWorkout;

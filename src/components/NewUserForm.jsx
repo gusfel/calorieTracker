@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import CoolButton from '../CoolButton.jsx';
+import CoolButton from '../CoolButton';
 
 class NewUserForm extends React.Component {
   constructor(props) {
@@ -42,6 +42,7 @@ class NewUserForm extends React.Component {
   }
 
   handleSubmit(event) {
+    const { setUpUser } = this.props;
     if (this.validate()) {
       const options = {
         method: 'post',
@@ -58,7 +59,7 @@ class NewUserForm extends React.Component {
             const userData = res.data;
             userData.appStatus = '';
             userData.userid = res.data.id;
-            this.props.setUpUser(userData);
+            setUpUser(userData);
             this.clearState();
           }
         });
@@ -99,12 +100,14 @@ class NewUserForm extends React.Component {
   }
 
   render() {
+    const { logOut } = this.props;
+    const { userName, password, fname, lname, age, gender, maxcals, warning } = this.state;
     return (
       <div id="newUserPage">
         <div id="newUserHeader">
           <span className="pageTitle">Most Valuable Calorie Tracker</span>
           <div className="logOutBtn">
-            <CoolButton id="goBack" func={this.props.logOut} name="Back" />
+            <CoolButton id="goBack" func={logOut} name="Back" />
           </div>
         </div>
         <div id="newUserSubtitle">
@@ -115,33 +118,33 @@ class NewUserForm extends React.Component {
             <div role="group">
               <label>
                 Username:&nbsp;
-                <input type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange} />
+                <input type="text" name="userName" value={userName} onChange={this.handleInputChange} />
               </label>
               <label>
                 Password:&nbsp;
-                <input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
+                <input type="password" name="password" value={password} onChange={this.handleInputChange} />
               </label>
             </div>
             <div className="divider" />
             <div role="group">
               <label>
                 First Name:&nbsp;
-                <input type="text" name="fname" value={this.state.fname} onChange={this.handleInputChange} />
+                <input type="text" name="fname" value={fname} onChange={this.handleInputChange} />
               </label>
               <label>
                 Last Name:&nbsp;
-                <input type="text" name="lname" value={this.state.lname} onChange={this.handleInputChange} />
+                <input type="text" name="lname" value={lname} onChange={this.handleInputChange} />
               </label>
             </div>
             <div className="divider" />
             <div role="group">
               <label>
                 Age:&nbsp;
-                <input type="number" name="age" value={this.state.age} onChange={this.handleInputChange} />
+                <input type="number" name="age" value={age} onChange={this.handleInputChange} />
               </label>
               <label>
                 Gender:&nbsp;
-                <select name="gender" value={this.state.gender} onChange={this.handleInputChange}>
+                <select name="gender" value={gender} onChange={this.handleInputChange}>
                   <option value="" />
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -169,20 +172,20 @@ class NewUserForm extends React.Component {
             <div id="newUserMaxCals">
               <label>
                 Max Daily Calories:&nbsp;
-                <input type="number" name="maxcals" value={this.state.maxcals} onChange={this.handleInputChange} />
+                <input type="number" name="maxcals" value={maxcals} onChange={this.handleInputChange} />
               </label>
             </div>
             <CoolButton name="Submit" func={this.handleSubmit} />
           </form>
         </div>
-        {this.state.warning === 'username'
+        {warning === 'username'
           ? (
             <div className="warning">
               Sorry that username is already in use, please choose another
             </div>
           )
           : <></>}
-        {this.state.warning === 'missingData'
+        {warning === 'missingData'
           ? (
             <div className="warning">
               Please make sure all forms are completed before submitting

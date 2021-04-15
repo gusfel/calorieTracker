@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import CoolButton from '../CoolButton.jsx';
+import CoolButton from '../CoolButton';
 
 class WelcomeForm extends React.Component {
   constructor(props) {
@@ -23,7 +23,8 @@ class WelcomeForm extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
+    const { setUpUser } = this.props;
     const options = {
       method: 'get',
       url: '/login',
@@ -35,19 +36,19 @@ class WelcomeForm extends React.Component {
           const userData = res.data;
           userData.appStatus = '';
           userData.userid = res.data.id;
-          this.props.setUpUser(userData);
+          setUpUser(userData);
         } else {
-          // show warning
           console.log('sorry');
           this.setState({
             warning: true,
           });
         }
       });
-    // event.preventDefault();
   }
 
   render() {
+    const { userName, password, warning } = this.state;
+    const { changeStatus } = this.props;
     return (
       <div>
         <div id="newUserTitle">
@@ -59,16 +60,12 @@ class WelcomeForm extends React.Component {
         <div id="loginSections">
           <div id="loginDiv">
             <form onSubmit={this.handleSubmit}>
-              {/* <label> */}
-              <input type="text" placeholder="Username" name="userName" value={this.state.userName} onChange={this.handleInputChange} />
-              {/* </label> */}
+              <input type="text" placeholder="Username" name="userName" value={userName} onChange={this.handleInputChange} />
               <br />
-              {/* <label> */}
-              <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleInputChange} />
-              {/* </label> */}
+              <input type="password" placeholder="Password" name="password" value={password} onChange={this.handleInputChange} />
             </form>
             <CoolButton name="Enter" func={this.handleSubmit} />
-            {this.state.warning
+            {warning
               ? (
                 <div className="warning">
                   Sorry no users match that username or password, please try again
@@ -78,7 +75,7 @@ class WelcomeForm extends React.Component {
           </div>
           <div id="welcomeDivider" />
           <div id="loginNewUserBtn">
-            <CoolButton type="submit" name="New User?" func={() => { this.props.changeStatus('newUser'); }} />
+            <CoolButton type="submit" name="New User?" func={() => { changeStatus('newUser'); }} />
           </div>
         </div>
       </div>

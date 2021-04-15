@@ -1,20 +1,19 @@
 import React from 'react';
 import axios from 'axios';
-import WelcomeForm from './WelcomeForm.jsx';
-import Breakdown from './Breakdown.jsx';
-import FoodList from './FoodList.jsx';
-import WorkoutList from './WorkoutList.jsx';
-import NewUserForm from './NewUserForm.jsx';
-import AddWorkout from './AddWorkout.jsx';
-import AddFood from './AddFood.jsx';
-import CoolButton from '../CoolButton.jsx';
+import WelcomeForm from './WelcomeForm';
+import Breakdown from './Breakdown';
+import FoodList from './FoodList';
+import WorkoutList from './WorkoutList';
+import NewUserForm from './NewUserForm';
+import AddWorkout from './AddWorkout';
+import AddFood from './AddFood';
+import CoolButton from '../CoolButton';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userid: null,
-      // userid: 1,
       username: '',
       height: null,
       weight: null,
@@ -23,8 +22,6 @@ class App extends React.Component {
       fname: '',
       lname: '',
       maxcals: null,
-      // appStatus: '',
-      // appStatus: 'newUser',
       appStatus: 'welcome',
       currentIn: 0,
       currentOut: 0,
@@ -48,22 +45,23 @@ class App extends React.Component {
   }
 
   setUpUser(obj) {
+    const newObj = obj;
     let date = new Date();
     date = date.toLocaleDateString().slice(0, 10);
-    obj.date = date;
-    obj.displayDate = date;
-    console.log(date);
-    this.setState(obj);
+    newObj.date = date;
+    newObj.displayDate = date;
+    this.setState(newObj);
     this.updateIn(date);
     this.updateOut(date);
   }
 
   updateIn(date) {
+    const { userid } = this.state;
     const options = {
       method: 'get',
       url: '/updateIn',
       params: {
-        id: this.state.userid,
+        id: userid,
         date,
       },
     };
@@ -82,15 +80,17 @@ class App extends React.Component {
   }
 
   changeToToday() {
+    const { date } = this.state;
     this.setState({
-      displayDate: this.state.date,
+      displayDate: date,
     });
-    this.updateIn(this.state.date);
-    this.updateOut(this.state.date);
+    this.updateIn(date);
+    this.updateOut(date);
   }
 
   changeDate(direction) {
-    let nextDate = new Date(this.state.displayDate);
+    const { displayDate } = this.state;
+    let nextDate = new Date(displayDate);
     if (direction === 'back') {
       nextDate = nextDate.setDate(nextDate.getDate() - 1);
     } else {
@@ -131,11 +131,12 @@ class App extends React.Component {
   }
 
   updateOut(date) {
+    const { userid } = this.state;
     const options = {
       method: 'get',
       url: '/updateOut',
       params: {
-        id: this.state.userid,
+        id: userid,
         date,
       },
     };
@@ -154,16 +155,18 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.appStatus === 'welcome') {
+    const {
+      appStatus, food, displayDate, userid, workouts,
+    } = this.state;
+    if (appStatus === 'welcome') {
       return (
         <div>
           <WelcomeForm setUpUser={this.setUpUser} changeStatus={this.changeStatus} />
         </div>
       );
-    } if (this.state.appStatus === 'newUser') {
+    } if (appStatus === 'newUser') {
       return (
         <div>
-          {/* <CoolButton id="goBack" func={this.logOut} name="Go Back" /> */}
           <NewUserForm
             logOut={this.logOut}
             setUpUser={this.setUpUser}
@@ -190,18 +193,18 @@ class App extends React.Component {
           </div>
           <div id="fAndWLists">
             <div id="foodList">
-              <FoodList foods={this.state.food} />
+              <FoodList foods={food} />
               <AddFood
-                userid={this.state.userid}
-                displayDate={this.state.displayDate}
+                userid={userid}
+                displayDate={displayDate}
                 updateIn={this.updateIn}
               />
             </div>
             <div id="listDivider" />
             <div id="workoutList">
-              <WorkoutList workouts={this.state.workouts} />
+              <WorkoutList workouts={workouts} />
               <AddWorkout
-                displayDate={this.state.displayDate}
+                displayDate={displayDate}
                 updateOut={this.updateOut}
                 user={this.state}
               />
