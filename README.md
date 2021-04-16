@@ -21,3 +21,4 @@ A calorie tracking app for multiple users with log ins.  Keeps track of your dai
 5. Open localhost:3000 in a browser
 
 \* You wont be able to pull calorie data becauase you need to set up an API key, but you can still navigate around the app.  See below for a gif of the functionality:
+![Image](./MVP_gif.gif)
