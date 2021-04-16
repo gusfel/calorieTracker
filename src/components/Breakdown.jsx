@@ -58,4 +58,16 @@ const Breakdown = ({ userInfo, changeDate, changeToToday }) => {
   );
 };
 
+Breakdown.propTypes = {
+  changeDate: PropTypes.func.isRequired,
+  changeToToday: PropTypes.func.isRequired,
+  userInfo: PropTypes.shape({
+    maxcals: PropTypes.number,
+    currentIn: PropTypes.number,
+    currentOut: PropTypes.number,
+    date: PropTypes.string,
+    displayDate: PropTypes.string,
+  }).isRequired,
+};
+
 export default Breakdown;
