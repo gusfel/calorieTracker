@@ -19,4 +19,8 @@ const FoodList = ({ foods }) => (
   </div>
 );
 
+// FoodList.propTypes = {
+//   foods: PropTypes.
+// }
+
 export default FoodList;
