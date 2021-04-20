@@ -12,6 +12,18 @@ const FoodListItem = ({ food }) => (
   </div>
 );
 
-// FoodListItem
+FoodListItem.propTypes = {
+  food: PropTypes.shape({
+    foodname: PropTypes.string,
+    caloriesin: PropTypes.number,
+  }),
+};
+
+FoodListItem.defaultProps = {
+  food: PropTypes.shape({
+    foodname: '',
+    caloriesin: '',
+  }),
+};
 
 export default FoodListItem;
