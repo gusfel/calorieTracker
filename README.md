@@ -3,7 +3,7 @@ A calorie tracking app \
 *by*\
 [Agustin Feliciano](https://github.com/gusfel)
 ---
-A calorie tracking app for multiple users with log ins.  Keeps track of your daily calorie intake from food vs calorie output from activites based on a daily calorie limit that the user sets.  Pulls food and exercise calorie data from the [Link](nutritionix.com) database.  Stores user data in a PostgreSQL database.
+A calorie tracking app for multiple users with log ins.  Keeps track of your daily calorie intake from food vs calorie output from activites based on a daily calorie limit that the user sets.  Pulls food and exercise calorie data from the [nutritionix.com](nutritionix.com) database.  Stores user data in a PostgreSQL database.
 
 **Technologies Used**
 1. React
