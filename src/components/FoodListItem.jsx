@@ -12,6 +12,6 @@ const FoodListItem = ({ food }) => (
   </div>
 );
 
-FoodListItem
+// FoodListItem
 
 export default FoodListItem;

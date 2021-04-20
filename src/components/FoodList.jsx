@@ -20,8 +20,8 @@ const FoodList = ({ foods }) => (
   </div>
 );
 
-FoodList.propTypes = {
-  foods: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+// FoodList.propTypes = {
+//   foods: PropTypes.arrayOf(PropTypes.object).isRequired,
+// };
 
 export default FoodList;

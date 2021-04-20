@@ -41,8 +41,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.updateIn();
-    this.updateOut();
+    let date = new Date();
+    date = date.toLocaleDateString().slice(0, 10);
+    this.updateIn(date);
+    this.updateOut(date);
   }
 
   setUpUser(obj) {
@@ -68,15 +70,17 @@ class App extends React.Component {
     };
     axios(options)
       .then((res) => {
-        const todaysFood = res.data;
-        let totalIn = 0;
-        todaysFood.forEach((food) => {
-          totalIn += food.caloriesin;
-        });
-        this.setState({
-          food: todaysFood,
-          currentIn: totalIn,
-        });
+        if (Array.isArray(res.data)) {
+          const todaysFood = res.data;
+          let totalIn = 0;
+          todaysFood.forEach((food) => {
+            totalIn += food.caloriesin;
+          });
+          this.setState({
+            food: todaysFood,
+            currentIn: totalIn,
+          });
+        }
       });
   }
 
@@ -143,15 +147,17 @@ class App extends React.Component {
     };
     axios(options)
       .then((res) => {
-        const todaysWork = res.data;
-        let totalOut = 0;
-        todaysWork.forEach((workout) => {
-          totalOut += workout.caloriesout;
-        });
-        this.setState({
-          workouts: res.data,
-          currentOut: totalOut,
-        });
+        if (Array.isArray(res.data)) {
+          const todaysWork = res.data;
+          let totalOut = 0;
+          todaysWork.forEach((workout) => {
+            totalOut += workout.caloriesout;
+          });
+          this.setState({
+            workouts: res.data,
+            currentOut: totalOut,
+          });
+        }
       });
   }
 
