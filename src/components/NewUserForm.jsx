@@ -102,7 +102,9 @@ class NewUserForm extends React.Component {
 
   render() {
     const { logOut } = this.props;
-    const { userName, password, fname, lname, age, gender, maxcals, warning } = this.state;
+    const {
+      userName, password, fname, lname, age, gender, maxcals, warning,
+    } = this.state;
     return (
       <div id="newUserPage">
         <div id="newUserHeader">

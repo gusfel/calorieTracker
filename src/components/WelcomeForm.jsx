@@ -39,7 +39,6 @@ class WelcomeForm extends React.Component {
           userData.userid = res.data.id;
           setUpUser(userData);
         } else {
-          console.log('sorry');
           this.setState({
             warning: true,
           });
@@ -83,5 +82,10 @@ class WelcomeForm extends React.Component {
     );
   }
 }
+
+WelcomeForm.propTypes = {
+  setUpUser: PropTypes.func.isRequired,
+  changeStatus: PropTypes.func.isRequired,
+};
 
 export default WelcomeForm;
