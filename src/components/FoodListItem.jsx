@@ -12,4 +12,6 @@ const FoodListItem = ({ food }) => (
   </div>
 );
 
+FoodListItem
+
 export default FoodListItem;
