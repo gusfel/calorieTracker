@@ -39,7 +39,6 @@ class NewUserForm extends React.Component {
       [name]: value,
       warning: false,
     });
-    console.log(this.state);
   }
 
   handleSubmit(event) {
@@ -119,36 +118,36 @@ class NewUserForm extends React.Component {
         <div id="newUserForm">
           <form onSubmit={this.handleSubmit}>
             <div role="group">
-              <label>
+              <label htmlFor="userName">
                 Username:&nbsp;
-                <input type="text" name="userName" value={userName} onChange={this.handleInputChange} />
+                <input id="userName" type="text" name="userName" value={userName} onChange={this.handleInputChange} />
               </label>
-              <label>
+              <label htmlFor="password">
                 Password:&nbsp;
-                <input type="password" name="password" value={password} onChange={this.handleInputChange} />
+                <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
               </label>
             </div>
             <div className="divider" />
             <div role="group">
-              <label>
+              <label htmlFor="fname">
                 First Name:&nbsp;
-                <input type="text" name="fname" value={fname} onChange={this.handleInputChange} />
+                <input id="fname" type="text" name="fname" value={fname} onChange={this.handleInputChange} />
               </label>
-              <label>
+              <label htmlFor="lname">
                 Last Name:&nbsp;
-                <input type="text" name="lname" value={lname} onChange={this.handleInputChange} />
+                <input id="lname" type="text" name="lname" value={lname} onChange={this.handleInputChange} />
               </label>
             </div>
             <div className="divider" />
             <div role="group">
-              <label>
+              <label htmlFor="age">
                 Age:&nbsp;
-                <input type="number" name="age" value={age} onChange={this.handleInputChange} />
+                <input id="age" type="number" name="age" value={age} onChange={this.handleInputChange} />
               </label>
-              <label>
+              <label htmlFor="gender">
                 Gender:&nbsp;
-                <select name="gender" value={gender} onChange={this.handleInputChange}>
-                  <option value="" />
+                <select id="gender" name="gender" value={gender} onChange={this.handleInputChange}>
+                  <option value="null"> </option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
@@ -156,26 +155,26 @@ class NewUserForm extends React.Component {
             </div>
             <div className="divider" />
             <div role="group">
-              <label>
+              <label htmlFor="height">
                 Height
                 {' '}
                 <span className="newUserMeasure">(inches)</span>
                 :&nbsp;
-                <input type="number" name="height" onChange={this.handleInputChange} />
+                <input id="height" type="number" name="height" onChange={this.handleInputChange} />
               </label>
-              <label>
+              <label htmlFor="weight">
                 Weight
                 {' '}
                 <span className="newUserMeasure">(pounds)</span>
                 :&nbsp;
-                <input type="number" name="weight" onChange={this.handleInputChange} />
+                <input id="weight" type="number" name="weight" onChange={this.handleInputChange} />
               </label>
             </div>
             <div className="divider" />
             <div id="newUserMaxCals">
-              <label>
+              <label htmlFor="maxcals">
                 Max Daily Calories:&nbsp;
-                <input type="number" name="maxcals" value={maxcals} onChange={this.handleInputChange} />
+                <input id="maxcals" type="number" name="maxcals" value={maxcals} onChange={this.handleInputChange} />
               </label>
             </div>
             <CoolButton name="Submit" func={this.handleSubmit} />
@@ -199,5 +198,10 @@ class NewUserForm extends React.Component {
     );
   }
 }
+
+NewUserForm.propTypes = {
+  setUpUser: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired,
+};
 
 export default NewUserForm;
