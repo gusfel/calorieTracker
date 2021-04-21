@@ -1,6 +1,6 @@
+/* eslint-disable react/no-unused-state */
 import React from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import WelcomeForm from './WelcomeForm';
 import Breakdown from './Breakdown';
 import FoodList from './FoodList';
