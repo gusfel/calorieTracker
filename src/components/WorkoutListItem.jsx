@@ -11,4 +11,18 @@ const WorkoutListItem = ({ workout }) => (
   </div>
 );
 
+WorkoutListItem.propTypes = {
+  workout: PropTypes.shape({
+    exercise: PropTypes.string,
+    caloriesout: PropTypes.number,
+  }),
+};
+
+WorkoutListItem.defaultProps = {
+  workout: PropTypes.shape({
+    exercise: '',
+    caloriesout: '',
+  }),
+};
+
 export default WorkoutListItem;
