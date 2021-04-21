@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import PropTypes from 'prop-types';
 import WorkoutListItem from './WorkoutListItem';
@@ -18,5 +19,9 @@ const WorkoutList = ({ workouts }) => (
     </div>
   </div>
 );
+
+WorkoutList.propTypes = {
+  workouts: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default WorkoutList;
