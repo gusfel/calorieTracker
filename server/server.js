@@ -33,20 +33,32 @@ app.post('/food', (req, res) => {
       const query = `INSERT INTO
       food( userid, foodname, caloriesin, date)
       VALUES( ${userid}, '${foodText}', ${calories}, '${date}')`;
-      db.connect((err, client, done) => {
-        if (err) {
-          res.send(err);
-        } else {
-          client.query(query, (err2, data) => {
-            done();
-            if (err2) {
-              res.send(err2);
-            } else {
-              res.send('success');
-            }
-          });
-        }
-      });
+      db
+        .connect()
+        .then((client) => client
+          .query(query)
+          .then((res2) => {
+            client.release();
+            res.send('success');
+          })
+          .catch((err2) => {
+            client.release();
+            res.send(err2);
+          }));
+      // db.connect((err, client, done) => {
+      //   if (err) {
+      //     res.send(err);
+      //   } else {
+      //     client.query(query, (err2, data) => {
+      //       done();
+      //       if (err2) {
+      //         res.send(err2);
+      //       } else {
+      //         res.send('success');
+      //       }
+      //     });
+      //   }
+      // });
     })
     .catch((aErr) => {
       res.send('error');
